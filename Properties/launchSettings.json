@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Vader4ProReader": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

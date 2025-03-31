@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="Vader4ProReader.View.Axis1DControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:Vader4ProReader.ViewModel"
+             mc:Ignorable="d" 
+             d:Background="White" x:Name="theControl" d:Width="24" d:Height="24">
+    <UserControl.Resources>
+        <vm:Axis1DHorizontalConverter x:Key="HConverter"/>
+        <vm:Axis1DVerticalConverter x:Key="VConverter"/>
+        <vm:DockToOriginConverter x:Key="OriginConverter"/>
+    </UserControl.Resources>
+        <Border BorderBrush="Black" BorderThickness="1">
+        <Rectangle StrokeThickness="0" Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" RenderTransformOrigin="{Binding Dock, ElementName=theControl, Converter={StaticResource OriginConverter}}">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform d:ScaleY="0.5">
+                            <ScaleTransform.ScaleX>
+                                <MultiBinding Converter="{StaticResource HConverter}">
+                                    <Binding Path="Value" ElementName="theControl"/>
+                                    <Binding Path="MinValue" ElementName="theControl"/>
+                                    <Binding Path="MaxValue" ElementName="theControl"/>
+                                    <Binding Path="Dock" ElementName="theControl"/>
+                                </MultiBinding>
+                            </ScaleTransform.ScaleX>
+                            <ScaleTransform.ScaleY>
+                                <MultiBinding Converter="{StaticResource VConverter}">
+                                    <Binding Path="Value" ElementName="theControl"/>
+                                    <Binding Path="MinValue" ElementName="theControl"/>
+                                    <Binding Path="MaxValue" ElementName="theControl"/>
+                                    <Binding Path="Dock" ElementName="theControl"/>
+                                </MultiBinding>
+                            </ScaleTransform.ScaleY>
+                        </ScaleTransform>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+        </Border>
+</UserControl>

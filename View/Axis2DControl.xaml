@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="Vader4ProReader.View.Axis2DControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:Vader4ProReader.ViewModel"
+             mc:Ignorable="d" x:Name="theControl"
+             d:Background="White">
+    <UserControl.Resources>
+        <vm:Axis2DConverter x:Key="AxisConverter"/>
+    </UserControl.Resources>
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="{Binding AxisName, ElementName=theControl}" HorizontalAlignment="Center" Grid.ColumnSpan="2" />
+        <Border Grid.Row="1" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1" Height="100" Width="100" RenderTransformOrigin="0.5,0.5" x:Name="border">
+            <Ellipse StrokeThickness="0" Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Width="4" Height="4" RenderTransformOrigin="0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-2,-2,0,0">
+                <Ellipse.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform d:X="24" d:Y="24">
+                            <TranslateTransform.X>
+                                <MultiBinding Converter="{StaticResource AxisConverter}">
+                                    <Binding Path="XValue" ElementName="theControl"/>
+                                    <Binding Path="MinXValue" ElementName="theControl"/>
+                                    <Binding Path="MaxXValue" ElementName="theControl"/>
+                                    <Binding Path="ActualWidth" ElementName="border"/>
+                                </MultiBinding>
+                            </TranslateTransform.X>
+                            <TranslateTransform.Y>
+                                <MultiBinding Converter="{StaticResource AxisConverter}">
+                                    <Binding Path="YValue" ElementName="theControl"/>
+                                    <Binding Path="MinYValue" ElementName="theControl"/>
+                                    <Binding Path="MaxYValue" ElementName="theControl"/>
+                                    <Binding Path="ActualHeight" ElementName="border"/>
+                                </MultiBinding>
+                            </TranslateTransform.Y>
+                        </TranslateTransform>
+                    </TransformGroup>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+        </Border>
+        <TextBlock Grid.Row="2" Grid.Column="0" FontFamily="Consolas">
+        X=<Run Text="{Binding XValue, ElementName=theControl}"/>
+        </TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="1" FontFamily="Consolas">
+        Y=<Run Text="{Binding YValue, ElementName=theControl}"/>
+        </TextBlock>
+    </Grid>
+</UserControl>
