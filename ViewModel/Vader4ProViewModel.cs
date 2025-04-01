@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -98,6 +99,13 @@ namespace Vader4ProReader
         public int LedMin => 0;
         public int LedMax => 255;
 
+        [ObservableProperty] public partial int YawRaw { get; set; }
+        [ObservableProperty] public partial int PitchRaw { get; set; }
+        [ObservableProperty] public partial int RollRaw { get; set; }
+        [ObservableProperty] public partial int AccelXRaw { get; set; }
+        [ObservableProperty] public partial int AccelYRaw { get; set; }
+        [ObservableProperty] public partial int AccelZRaw { get; set; }
+        [ObservableProperty] public partial double AccelSum { get; set; }
 
         [ObservableProperty] public partial double YawMinRecorded { get; set; }
         [ObservableProperty] public partial double YawMaxRecorded { get; set; }
@@ -208,6 +216,14 @@ namespace Vader4ProReader
             AccelX = report.AccelXCalibrated;
             AccelY = report.AccelYCalibrated;
             AccelZ = report.AccelZCalibrated;
+            AccelSum = new Vector3(report.AccelXCalibrated, report.AccelYCalibrated, report.AccelZCalibrated).Length();
+
+            YawRaw = report.YawRaw;
+            PitchRaw = report.PitchRaw;
+            RollRaw = report.RollRaw;
+            AccelXRaw = report.AccelXRaw;
+            AccelYRaw = report.AccelYRaw;
+            AccelZRaw = report.AccelZRaw;
 
             if (report.YawRaw < YawMinRecorded) YawMinRecorded = report.YawRaw;
             if (report.YawRaw > YawMaxRecorded) YawMaxRecorded = report.YawRaw;

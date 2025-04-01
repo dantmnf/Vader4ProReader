@@ -144,9 +144,19 @@ namespace Vader4ProReader.Device
         public short AccelYRaw => BitConverter.ToInt16(rawReport.Span[15..17]);
         public short AccelZRaw => BitConverter.ToInt16(rawReport.Span[13..15]);
 
-        public float AccelXCalibrated => AccelXRaw / 256.0f * 9.80665f;
-        public float AccelYCalibrated => AccelYRaw / 256.0f * 9.80665f;
-        public float AccelZCalibrated => AccelZRaw / 256.0f * 9.80665f;
+
+        // X/Y/Z axis automatically calibrated to 0/256/0 when the device is steady
+        // statistical analysis shows that Z axis is offset by approx. 32, assume (256*scale)^2 + (32*scale)^2 = g^2
+        // this may vary between devices and firmware versions
+        // alternatively, do optimization with (ScaleX*(X+OffsetX))^2 + (ScaleY*(Y+OffsetY))^2 + (ScaleZ*(Z+OffsetZ))^2 = g^2
+        // with steady readings in different orientations
+
+        // scale = 9.80665 / sqrt(256^2 + 32^2)
+        const float accelScale = 0.03801141343622691f;
+
+        public float AccelXCalibrated => AccelXRaw * accelScale;
+        public float AccelYCalibrated => AccelYRaw * accelScale;
+        public float AccelZCalibrated => (AccelZRaw + 32) * accelScale;
 
         public bool IsAirMouseActive => (rawReport.Span[3] & 128) != 0;
 

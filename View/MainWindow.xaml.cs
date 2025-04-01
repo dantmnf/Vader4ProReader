@@ -74,6 +74,8 @@ namespace Vader4ProReader.View
                 }
                 dev.Dispose();
             }
+            Binding x;
+            
         }
     }
 }

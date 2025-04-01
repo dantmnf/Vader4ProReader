@@ -13,4 +13,5 @@ This is a prototype application for accessing full functionality of the Flydigi 
 * Accelerometer readings automatically scale to `(0, 256, 0)` on idle, scaled again with constant `9.80665/256`.
   - May lead to inaccurate readings on free fall
   - Scale is reported differently across devices and firmware versions: https://github.com/fishchev/vader-3-pro-gyro
+  - May require optimization-based calibration
 * No battery level reporting.

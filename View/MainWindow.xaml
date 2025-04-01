@@ -81,6 +81,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="100" />
                     <ColumnDefinition Width="64" />
+                    <ColumnDefinition Width="64" />
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Text="Yaw" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
@@ -103,6 +104,13 @@
                 <TextBlock Grid.Row="4" Grid.Column="2" FontFamily="Consolas" VerticalAlignment="Center" Text="{Binding AccelX, StringFormat={}{0,8: 0.0000;-0.0000}}" d:Text="1"/>
                 <TextBlock Grid.Row="5" Grid.Column="2" FontFamily="Consolas" VerticalAlignment="Center" Text="{Binding AccelY, StringFormat={}{0,8: 0.0000;-0.0000}}" d:Text="1"/>
                 <TextBlock Grid.Row="6" Grid.Column="2" FontFamily="Consolas" VerticalAlignment="Center" Text="{Binding AccelZ, StringFormat={}{0,8: 0.0000;-0.0000}}" d:Text="1"/>
+
+                <TextBlock Grid.Row="0" Grid.Column="3" FontFamily="Consolas" VerticalAlignment="Center" Text="{Binding YawRaw,    StringFormat={}{0,8: 0;-0}}" d:Text="1"/>
+                <TextBlock Grid.Row="1" Grid.Column="3" FontFamily="Consolas" VerticalAlignment="Center" Text="{Binding PitchRaw,  StringFormat={}{0,8: 0;-0}}" d:Text="1"/>
+                <TextBlock Grid.Row="2" Grid.Column="3" FontFamily="Consolas" VerticalAlignment="Center" Text="{Binding RollRaw,   StringFormat={}{0,8: 0;-0}}" d:Text="1"/>
+                <TextBlock Grid.Row="4" Grid.Column="3" FontFamily="Consolas" VerticalAlignment="Center" Text="{Binding AccelXRaw, StringFormat={}{0,8: 0;-0}}" d:Text="1"/>
+                <TextBlock Grid.Row="5" Grid.Column="3" FontFamily="Consolas" VerticalAlignment="Center" Text="{Binding AccelYRaw, StringFormat={}{0,8: 0;-0}}" d:Text="1"/>
+                <TextBlock Grid.Row="6" Grid.Column="3" FontFamily="Consolas" VerticalAlignment="Center" Text="{Binding AccelZRaw, StringFormat={}{0,8: 0;-0}}" d:Text="1"/>
             </Grid>
 
         </StackPanel>
@@ -162,9 +170,10 @@
             <StackPanel>
                 <Button Padding="6,2" Content="Disable AirMouse" Command="{Binding DisableAirMouseCommand}"/>
                 <Button Padding="6,2" Content="Enable AirMouse" Margin="0,4,0,0"  Command="{Binding EnableAirMouseCommand}"/>
-                <TextBlock>Yaw Min/Max: <Run Text="{Binding YawMinRecorded}"/>/<Run Text="{Binding YawMaxRecorded}"/></TextBlock>
-                <TextBlock>Pitch Min/Max: <Run Text="{Binding PitchMinRecorded}"/>/<Run Text="{Binding PitchMaxRecorded}"/></TextBlock>
-                <TextBlock>Roll Min/Max: <Run Text="{Binding RollMinRecorded}"/>/<Run Text="{Binding RollMaxRecorded}"/></TextBlock>
+                <TextBlock>Raw Yaw Min/Max: <Run Text="{Binding YawMinRecorded}"/>/<Run Text="{Binding YawMaxRecorded}"/></TextBlock>
+                <TextBlock>Raw Pitch Min/Max: <Run Text="{Binding PitchMinRecorded}"/>/<Run Text="{Binding PitchMaxRecorded}"/></TextBlock>
+                <TextBlock>Raw Roll Min/Max: <Run Text="{Binding RollMinRecorded}"/>/<Run Text="{Binding RollMaxRecorded}"/></TextBlock>
+                <TextBlock>Accel vector length: <Run Text="{Binding AccelSum, StringFormat={}{0,8: 0.0000;-0.0000}}"/></TextBlock>
             </StackPanel>
         </GroupBox>
     </StackPanel>
