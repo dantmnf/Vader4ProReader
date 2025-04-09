@@ -136,9 +136,11 @@ namespace Vader4ProReader.Device
         public short PitchRaw => BitConverter.ToInt16(rawReport.Span[26..28]);
         public short RollRaw => BitConverter.ToInt16(rawReport.Span[29..31]);
 
-        public float YawFloat => YawRaw / 512.0f;
-        public float PitchFloat => PitchRaw / 512.0f;
-        public float RollFloat => (float)((RollRaw + 32768) / 65535.0 * 2.0 - 1.0);
+        // LSM6DS* gyroscope max range: +/- 2000 dps
+
+        public float YawCalibrated => YawRaw / 512.0f * 2000f;
+        public float PitchCalibrated => PitchRaw / 512.0f * 2000f;
+        public float RollCalibrated => (float)((RollRaw + 32768) / 65535.0 * 2.0 - 1.0) * 2000f;
 
         public short AccelXRaw => BitConverter.ToInt16(rawReport.Span[11..13]);
         public short AccelYRaw => BitConverter.ToInt16(rawReport.Span[15..17]);

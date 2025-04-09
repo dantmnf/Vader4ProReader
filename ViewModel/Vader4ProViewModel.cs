@@ -63,14 +63,14 @@ namespace Vader4ProReader
         public double RTMin => 0.0;
         public double RTMax => 255.0;
         [ObservableProperty] public partial double Yaw { get; set; }
-        public double YawMin => -1.0;
-        public double YawMax => 1.0;
+        public double YawMin => -2000.0;
+        public double YawMax => 2000.0;
         [ObservableProperty] public partial double Pitch { get; set; }
-        public double PitchMin => -1.0;
-        public double PitchMax => 1.0;
+        public double PitchMin => -2000.0;
+        public double PitchMax => 2000.0;
         [ObservableProperty] public partial double Roll { get; set; }
-        public double RollMin => -1.0;
-        public double RollMax => 1.0;
+        public double RollMin => -2000.0;
+        public double RollMax => 2000.0;
         [ObservableProperty] public partial double AccelX { get; set; }
         public double AccelXMin => -40;
         public double AccelXMax => 40;
@@ -210,9 +210,9 @@ namespace Vader4ProReader
 
             LT = report.LT;
             RT = report.RT;
-            Yaw = report.YawFloat;
-            Pitch = report.PitchFloat;
-            Roll = report.RollFloat;
+            Yaw = report.YawCalibrated;
+            Pitch = report.PitchCalibrated;
+            Roll = report.RollCalibrated;
             AccelX = report.AccelXCalibrated;
             AccelY = report.AccelYCalibrated;
             AccelZ = report.AccelZCalibrated;
