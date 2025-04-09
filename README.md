@@ -9,9 +9,9 @@ This is a prototype application for accessing full functionality of the Flydigi 
 
 * Only wired/dongle connection with DInput mode (FN+A, blue LED) is supported.
   - Other modes (Bluetooth/Switch/XInput) do not give all buttons and axes.
-* The range of gyroscope reading (angular velocity in SI) is unknown.
+* The range of IMU readings is not stable across different Flydigi controller models and firmware versions.
+  - https://github.com/fishchev/vader-3-pro-gyro
 * Accelerometer readings automatically scale to `(0, 256, 0)` on idle, scaled again with constant `9.80665/256`.
   - May lead to inaccurate readings on free fall
-  - Scale is reported differently across devices and firmware versions: https://github.com/fishchev/vader-3-pro-gyro
-  - May require optimization-based calibration
+  - Unstable scale may require optimization-based calibration
 * No battery level reporting.
